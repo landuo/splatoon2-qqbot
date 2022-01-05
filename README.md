@@ -9,7 +9,7 @@ splatoon2 QQ机器人
 * 此项目依 [marai](https://github.com/mamoe/mirai) 构建
 * 本项目参考 [spacemeowx2/splatoon2-qqbot](https://github.com/spacemeowx2/splatoon2-qqbot) 编写
 * 项目部分数据来源于 [splatoon2.ink](https://splatoon2.ink/) 以及 [stat.ink](https://stat.ink/)
-* 机器人协议原版权归属腾讯科技股份有限公司所有，本项目其他代码遵守
+* 机器人协议原版权归属腾讯科技股份有限公司所有，本项目其他代码遵守 [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.html) 协议
 * 本软件禁止用于一切商业活动
 * 本软件禁止收费传递
 
