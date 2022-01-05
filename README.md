@@ -14,7 +14,7 @@ splatoon2 QQ机器人
 * 本软件禁止收费传递
 
 # 许可证
-```aidl
+```
 Copyright (C) 2019-2022 Mamoe Technologies and contributors.
 
 This program is free software: you can redistribute it and/or modify
