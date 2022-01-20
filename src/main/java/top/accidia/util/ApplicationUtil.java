@@ -1,12 +1,13 @@
 package top.accidia.util;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import top.accidia.pojo.Weapon;
-
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import top.accidia.pojo.Weapon;
 
 /**
  * @author accidia

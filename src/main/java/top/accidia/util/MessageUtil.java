@@ -28,17 +28,17 @@ public class MessageUtil {
      * @param weapon
      */
     public static void sendWeaponMessage(MessageEvent event, MessageChainBuilder messages, Weapon weapon) {
-        messages.append(Contact.uploadImage(event.getSubject(), ResourceUtil.scale(weapon.getImage()))).append("\n")
+        messages.append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale(weapon.getImage()))).append("\n")
                 .append("简体中文: ").append(weapon.getZhCN()).append("\n")
                 .append(StrUtil.isNotBlank(weapon.getShortName()) ? "简称: " + weapon.getShortName() + "\n"
                         : StrUtil.EMPTY)
                 .append("英语: ").append(weapon.getEnUS()).append("\n").append("武器类型: ").append(weapon.getType())
                 .append("\n").append("副武器: ")
-                .append(Contact.uploadImage(event.getSubject(), ResourceUtil.scale(weapon.getSub().getImageA())))
+                .append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale(weapon.getSub().getImageA())))
                 .append(weapon.getSub().getName()).append("\n").append("大招: ")
-                .append(Contact.uploadImage(event.getSubject(), ResourceUtil.scale(weapon.getSpecial().getImageA())))
+                .append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale(weapon.getSpecial().getImageA())))
                 .append(weapon.getSpecial().getName()).append("\n")
-                .append(Contact.uploadImage(event.getSubject(), ResourceUtil.scale("/images/main_power_up.png")))
+                .append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale("/images/main_power_up.png")))
                 .append("主武器增强: ").append(weapon.getMainPowerUp());
         if (event instanceof GroupMessageEvent) {
             messages.append("\n").append(new At(event.getSender().getId()));

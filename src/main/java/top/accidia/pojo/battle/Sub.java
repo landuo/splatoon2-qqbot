@@ -1,14 +1,18 @@
 
-package top.accidia.pojo;
+package top.accidia.pojo.battle;
+
+import java.io.Serializable;
 
 import javax.annotation.Generated;
+
 import com.google.gson.annotations.SerializedName;
+
 import lombok.ToString;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
 @ToString
-public class Special {
+public class Sub implements Serializable {
 
     @SerializedName("id")
     private String mId;

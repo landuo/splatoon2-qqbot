@@ -1,9 +1,11 @@
 package top.accidia.api;
 
-import cn.hutool.http.HttpUtil;
 import com.google.gson.Gson;
-import top.accidia.pojo.Schedule;
-import top.accidia.util.SpApiConstant;
+
+import cn.hutool.http.HttpUtil;
+import top.accidia.constant.SpApiConstant;
+import top.accidia.pojo.battle.Schedule;
+import top.accidia.pojo.salmon.Salmon;
 
 /**
  * @author accidia
@@ -11,12 +13,18 @@ import top.accidia.util.SpApiConstant;
 public class Splatoon2Service {
 
     public static Schedule getSchedules() {
-        String response = HttpUtil.get(SpApiConstant.DATA_SCHEDULE);
+        System.out.println("发起http请求查询对战时刻表");
+        return getScheduleData(SpApiConstant.DATA_SCHEDULE, Schedule.class);
+    }
+
+    public static Salmon getSalmon() {
+        System.out.println("发起http请求查询打工时刻表");
+        return getScheduleData(SpApiConstant.SALMON_RUN_SCHEDULES, Salmon.class);
+    }
+
+    private static <T> T getScheduleData(String url, Class<T> classOfT) {
+        String response = HttpUtil.get(url);
         Gson gson = new Gson();
-        Schedule schedule = gson.fromJson(response, Schedule.class);
-        // schedule.getGachi().forEach(System.out::println);
-        // schedule.getRegular().forEach(System.out::println);
-        // schedule.getLeague().forEach(System.out::println);
-        return schedule;
+        return gson.fromJson(response, classOfT);
     }
 }

@@ -1,6 +1,7 @@
 
-package top.accidia.pojo;
+package top.accidia.pojo.battle;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +10,7 @@ import lombok.ToString;
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
 @ToString
-public class Schedule {
+public class Schedule implements Serializable {
 
     @SerializedName("gachi")
     private List<Gachi> mGachi;

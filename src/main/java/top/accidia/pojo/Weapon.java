@@ -4,11 +4,15 @@ package top.accidia.pojo;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 import lombok.ToString;
+import top.accidia.pojo.battle.Special;
+import top.accidia.pojo.battle.Sub;
+
+import java.io.Serializable;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
 @ToString
-public class Weapon {
+public class Weapon implements Serializable {
 
     @SerializedName("en_US")
     private String mEnUS;

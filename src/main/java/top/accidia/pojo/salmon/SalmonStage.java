@@ -1,26 +1,26 @@
 
-package top.accidia.pojo;
+package top.accidia.pojo.salmon;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
-import lombok.ToString;
+
+import java.io.Serializable;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
-@ToString
-public class GameMode {
+public class SalmonStage implements Serializable {
 
-    @SerializedName("key")
-    private String mKey;
+    @SerializedName("image")
+    private String mImage;
     @SerializedName("name")
     private String mName;
 
-    public String getKey() {
-        return mKey;
+    public String getImage() {
+        return mImage;
     }
 
-    public void setKey(String key) {
-        mKey = key;
+    public void setImage(String image) {
+        mImage = image;
     }
 
     public String getName() {

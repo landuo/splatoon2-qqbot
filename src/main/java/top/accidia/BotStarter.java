@@ -1,8 +1,6 @@
 package top.accidia;
 
-import cn.hutool.core.lang.Assert;
 import cn.hutool.core.lang.Validator;
-import cn.hutool.setting.dialect.Props;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
@@ -10,6 +8,7 @@ import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
 import net.mamoe.mirai.message.data.QuoteReply;
 import net.mamoe.mirai.utils.BotConfiguration;
+import top.accidia.constant.PropUtil;
 import top.accidia.handler.CommandContext;
 import top.accidia.handler.CommandHandler;
 import top.accidia.util.ApplicationUtil;
@@ -21,15 +20,10 @@ public class BotStarter {
 
     public static void main(String[] args) {
         ApplicationUtil.initWeaponData();
-        Props props = new Props("app.properties");
-        String botQQStr = (String) props.get("botQQ");
-        String botPwd = (String) props.get("botPwd");
-        Assert.notBlank(botQQStr, "请在app.properties中配置botQQ");
-        Assert.notBlank(botPwd, "请在app.properties中配置botPwd");
-
-        long botQQ = Long.parseLong(botQQStr);
+        long botQQ = Long.parseLong(PropUtil.getProp(PropUtil.BOT_QQ));
+        String botPwd = PropUtil.getProp(PropUtil.BOT_PWD);
         Bot bot = BotFactory.INSTANCE.newBot(botQQ, botPwd, configuration -> {
-            configuration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_PAD);
+            configuration.setProtocol(BotConfiguration.MiraiProtocol.IPAD);
             configuration.setHeartbeatStrategy(BotConfiguration.HeartbeatStrategy.STAT_HB);
             configuration.fileBasedDeviceInfo("device.json");
         });

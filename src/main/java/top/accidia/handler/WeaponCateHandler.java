@@ -7,7 +7,7 @@ import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
 import top.accidia.pojo.Weapon;
 import top.accidia.util.MessageUtil;
-import top.accidia.util.ResourceUtil;
+import top.accidia.util.ResourceUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -43,7 +43,7 @@ public class WeaponCateHandler implements CommandHandler {
                     .collect(Collectors.toList());
             if (CollectionUtil.isNotEmpty(weapons)) {
                 weapons.forEach(weapon -> messages
-                        .append(Contact.uploadImage(event.getSubject(), ResourceUtil.scale(weapon.getImage())))
+                        .append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale(weapon.getImage())))
                         .append("\n").append(weapon.getZhCN()).append("\n"));
                 event.getSubject().sendMessage(messages.build());
             }

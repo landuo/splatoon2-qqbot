@@ -1,14 +1,14 @@
 
-package top.accidia.pojo;
+package top.accidia.pojo.salmon;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
-import lombok.ToString;
+
+import java.io.Serializable;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
-@ToString
-public class StageB {
+public class SalmonWeapon implements Serializable {
 
     @SerializedName("id")
     private String mId;
@@ -16,6 +16,10 @@ public class StageB {
     private String mImage;
     @SerializedName("name")
     private String mName;
+    @SerializedName("thumbnail")
+    private String mThumbnail;
+    @SerializedName("weapon")
+    private SalmonWeapon mWeapon;
 
     public String getId() {
         return mId;
@@ -39,6 +43,22 @@ public class StageB {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public String getThumbnail() {
+        return mThumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        mThumbnail = thumbnail;
+    }
+
+    public SalmonWeapon getWeapon() {
+        return mWeapon;
+    }
+
+    public void setWeapon(SalmonWeapon weapon) {
+        mWeapon = weapon;
     }
 
 }
