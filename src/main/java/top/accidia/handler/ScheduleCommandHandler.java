@@ -1,13 +1,17 @@
 package top.accidia.handler;
 
+import java.awt.image.BufferedImage;
+
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.event.events.MessageEvent;
+import net.mamoe.mirai.message.data.At;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
-import top.accidia.pojo.battle.Regular;
-import top.accidia.pojo.battle.Schedule;
+import top.accidia.enums.CommandEnum;
 import top.accidia.util.CacheUtils;
-import top.accidia.util.DateUtils;
+import top.accidia.util.MessageUtil;
 import top.accidia.util.ResourceUtils;
 
 /**
@@ -24,22 +28,24 @@ public class ScheduleCommandHandler implements CommandHandler {
 
     @Override
     public void process(Bot bot, MessageEvent event, MessageChainBuilder messages) {
-        Schedule schedule = CacheUtils.getSchedule();
-        getRegularAtIndex(event, messages, schedule, 0);
-        messages.append("\n");
-        getRegularAtIndex(event, messages, schedule, 1);
+        String[] commands = MessageUtil.splitCommands(event.getMessage().contentToString());
+        String today = DateUtil.today();
+        int startHour;
+        try {
+            // 获取对战开始时间(偶数点)
+            int hour = commands.length == 1 ? DateUtil.thisHour(true) : Integer.parseInt(commands[1]);
+            startHour = hour >> 1 << 1;
+        } catch (NumberFormatException e) {
+            messages.append("参数格式错误");
+            event.getSubject().sendMessage(messages.build());
+            return;
+        }
+        // 组装map的key
+        String startTime = today + StrUtil.SPACE + (startHour < 10 ? "0" : "") + startHour;
+        BufferedImage bufferedImage = CacheUtils.getScheduleByTime(startTime);
+        messages.append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale(bufferedImage)));
+        messages.append(new At(event.getSender().getId()));
         event.getSubject().sendMessage(messages.build());
     }
 
-    private void getRegularAtIndex(MessageEvent event, MessageChainBuilder messages, Schedule schedule, Integer index) {
-        Regular regular = schedule.getRegular().get(index);
-        String startTime = DateUtils.formatDate(regular.getStartTime());
-        String endTime = DateUtils.formatDate(regular.getEndTime());
-        String time = startTime + "-" + endTime;
-        messages.append(time).append("\n");
-        messages.append(
-                Contact.uploadImage(event.getSubject(), ResourceUtils.scaleSize(regular.getStageA().getImage())));
-        messages.append(
-                Contact.uploadImage(event.getSubject(), ResourceUtils.scaleSize(regular.getStageB().getImage())));
-    }
 }

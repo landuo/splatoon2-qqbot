@@ -44,6 +44,7 @@ nbdist/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+*.iml
 
 # Generated files
 .idea/**/contentModel.xml
@@ -265,3 +266,5 @@ buildNumber.properties
 
 # 账号信息不保存
 cache/
+device.json
+rebel.xml

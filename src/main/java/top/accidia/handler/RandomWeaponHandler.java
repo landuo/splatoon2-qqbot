@@ -3,6 +3,7 @@ package top.accidia.handler;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
+import top.accidia.enums.CommandEnum;
 import top.accidia.pojo.Weapon;
 
 import java.util.Random;

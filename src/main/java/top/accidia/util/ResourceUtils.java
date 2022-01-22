@@ -9,9 +9,10 @@ import java.io.InputStream;
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.io.resource.Resource;
+import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.http.HttpUtil;
 import net.coobird.thumbnailator.Thumbnails;
-import top.accidia.constant.PropUtil;
 import top.accidia.constant.SpApiConstant;
 
 /**
@@ -48,11 +49,11 @@ public class ResourceUtils {
      * @param filePath
      *            资源文件的路径
      */
-    public static BufferedImage scaleToImage(String filePath, float scale) {
+    public static BufferedImage scaleToImage(String filePath, int width, int height) {
         InputStream resourceAsStream = Thread.currentThread().getContextClassLoader()
                 .getResourceAsStream(filePath.substring(1));
         try {
-            return Thumbnails.of(resourceAsStream).scale(scale).asBufferedImage();
+            return Thumbnails.of(resourceAsStream).width(width).height(height).asBufferedImage();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,11 +66,16 @@ public class ResourceUtils {
      * @param filePath
      *            资源文件的路径
      */
-    public static BufferedImage scaleToImage(String filePath, int width, int height) {
-        InputStream resourceAsStream = Thread.currentThread().getContextClassLoader()
-                .getResourceAsStream(filePath.substring(1));
+    public static BufferedImage scaleToImage(String filePath) {
+        return scaleToImage(filePath, 640, 360);
+    }
+
+    /**
+     * 缩放图片,按比例缩放
+     */
+    public static BufferedImage scaleToImage(BufferedImage image, double scale) {
         try {
-            return Thumbnails.of(resourceAsStream).width(width).height(height).asBufferedImage();
+            return Thumbnails.of(image).scale(scale).asBufferedImage();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,31 +113,6 @@ public class ResourceUtils {
 
     /**
      * 缩放图片,按长宽缩放
-     *
-     * @param absolutePath
-     *            文件的绝对路径
-     */
-    public static BufferedImage scaleSizeToBufferImage(String absolutePath, int width, int height) {
-        try {
-            return Thumbnails.of(absolutePath).width(width).height(height).asBufferedImage();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
-     * 缩放图片,按长宽缩放
-     *
-     * @param absolutePath
-     *            文件的绝对路径
-     */
-    public static BufferedImage scaleSizeToBufferImage(String absolutePath) {
-        return scaleSizeToBufferImage(absolutePath, 640, 360);
-    }
-
-    /**
-     * 缩放图片,按长宽缩放
      * 
      * @param filePath
      *            资源文件的路径
@@ -155,14 +136,25 @@ public class ResourceUtils {
      * @param picSuffix
      *            图片地址后缀
      */
-    public static InputStream getExternalPicture(String picSuffix) {
+    public static BufferedImage getExternalPicture(String picSuffix) {
         String picDir = PropUtil.getPicDir();
         File file = FileUtil.file(picDir + picSuffix);
         if (file.exists()) {
-            return FileUtil.getInputStream(file);
+            return ImgUtil.read(file);
         }
         // 图片不存在的话就去远程下载
         HttpUtil.downloadFile(SpApiConstant.PICTURE + picSuffix, picDir + picSuffix);
-        return FileUtil.getInputStream(picDir + picSuffix);
+        return ImgUtil.read(picDir + picSuffix);
+    }
+
+    /**
+     * 获取内部文件夹的图片
+     *
+     * @param picSuffix
+     *            图片地址后缀
+     */
+    public static BufferedImage getInternalPicture(String picSuffix) {
+        Resource resourceObj = ResourceUtil.getResourceObj(picSuffix.substring(1));
+        return ImgUtil.read(resourceObj);
     }
 }

@@ -8,7 +8,7 @@ import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
 import net.mamoe.mirai.message.data.QuoteReply;
 import net.mamoe.mirai.utils.BotConfiguration;
-import top.accidia.constant.PropUtil;
+import top.accidia.util.PropUtil;
 import top.accidia.handler.CommandContext;
 import top.accidia.handler.CommandHandler;
 import top.accidia.util.ApplicationUtil;
@@ -20,10 +20,11 @@ public class BotStarter {
 
     public static void main(String[] args) {
         ApplicationUtil.initWeaponData();
+        ApplicationUtil.initSchedule();
         long botQQ = Long.parseLong(PropUtil.getProp(PropUtil.BOT_QQ));
         String botPwd = PropUtil.getProp(PropUtil.BOT_PWD);
         Bot bot = BotFactory.INSTANCE.newBot(botQQ, botPwd, configuration -> {
-            configuration.setProtocol(BotConfiguration.MiraiProtocol.IPAD);
+            configuration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_PAD);
             configuration.setHeartbeatStrategy(BotConfiguration.HeartbeatStrategy.STAT_HB);
             configuration.fileBasedDeviceInfo("device.json");
         });

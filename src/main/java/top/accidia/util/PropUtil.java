@@ -1,4 +1,4 @@
-package top.accidia.constant;
+package top.accidia.util;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.setting.dialect.Props;

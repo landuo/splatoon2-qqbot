@@ -5,6 +5,7 @@ import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.MessageChainBuilder;
+import top.accidia.enums.CommandEnum;
 import top.accidia.pojo.Weapon;
 import top.accidia.util.MessageUtil;
 import top.accidia.util.ResourceUtils;

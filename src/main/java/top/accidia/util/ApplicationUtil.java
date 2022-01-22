@@ -24,4 +24,8 @@ public class ApplicationUtil {
         };
         WEAPONS = gson.fromJson(reader, type.getType());
     }
+
+    public static void initSchedule() {
+        new CacheUtils();
+    }
 }
