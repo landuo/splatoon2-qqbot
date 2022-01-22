@@ -3,7 +3,6 @@ package top.accidia.handler;
 import java.awt.image.BufferedImage;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.event.events.MessageEvent;
@@ -41,7 +40,7 @@ public class ScheduleCommandHandler implements CommandHandler {
             return;
         }
         // 组装map的key
-        String startTime = today + StrUtil.SPACE + (startHour < 10 ? "0" : "") + startHour;
+        String startTime = (startHour < 10 ? "0" : "") + startHour;
         BufferedImage bufferedImage = CacheUtils.getScheduleByTime(startTime);
         messages.append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale(bufferedImage)));
         messages.append(new At(event.getSender().getId()));

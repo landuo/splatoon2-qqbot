@@ -57,7 +57,7 @@ public class CacheUtils extends Splatoon2Service {
      * 根据时间获取对战安排
      * 
      * @param startTime
-     *            对战开始时间，格式: yyyy-MM-dd HH
+     *            对战开始时间，格式: HH
      */
     public static BufferedImage getScheduleByTime(String startTime) {
         boolean containsKey = SCHEDULE_PIC.containsKey(startTime);
@@ -110,7 +110,7 @@ public class CacheUtils extends Splatoon2Service {
             drawSchedule(picWidth, picHeight, paddingLeft, paddingTop, picPaddingTop, picPaddingLeft, regular, gachi,
                     league, bufferedImage);
             // 将生成的图片保存到map中
-            SCHEDULE_PIC.put(DateUtils.formatDate(regular.getStartTime(), "yyyy-MM-dd HH"), bufferedImage);
+            SCHEDULE_PIC.put(DateUtils.formatDate(regular.getStartTime(), "HH"), bufferedImage);
         }
     }
 
