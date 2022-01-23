@@ -22,10 +22,6 @@ public class MessageUtil {
 
     /**
      * 发送武器信息
-     *
-     * @param event
-     * @param messages
-     * @param weapon
      */
     public static void sendWeaponMessage(MessageEvent event, MessageChainBuilder messages, Weapon weapon) {
         messages.append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale(weapon.getImage()))).append("\n")
