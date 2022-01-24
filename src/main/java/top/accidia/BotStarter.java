@@ -45,8 +45,6 @@ public class BotStarter {
             }
             CommandHandler commandHandler = CommandContext.getMessageHandler(content);
             if (Validator.isNull(commandHandler)) {
-                messages.append("未找到该命令");
-                event.getSubject().sendMessage(messages.build());
                 return;
             }
             commandHandler.process(bot, event, messages);
