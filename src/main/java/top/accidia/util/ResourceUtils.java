@@ -1,6 +1,7 @@
 package top.accidia.util;
 
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -156,5 +157,27 @@ public class ResourceUtils {
     public static BufferedImage getInternalPicture(String picSuffix) {
         Resource resourceObj = ResourceUtil.getResourceObj(picSuffix.substring(1));
         return ImgUtil.read(resourceObj);
+    }
+
+    /**
+     * 图片圆角处理
+     * 
+     * @param image
+     *            原始图片
+     * 
+     * @return 圆角处理后的图片
+     */
+    public static BufferedImage radius(BufferedImage image) {
+        BufferedImage bufferedImage = new BufferedImage(image.getWidth(), image.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = bufferedImage.createGraphics();
+        g2.setComposite(AlphaComposite.Src);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(Color.WHITE);
+        g2.fill(new RoundRectangle2D.Float(0, 0, image.getWidth(), image.getHeight(), 30, 30));
+        g2.setComposite(AlphaComposite.SrcAtop);
+        g2.drawImage(image, 0, 0, null);
+        g2.dispose();
+        return bufferedImage;
     }
 }

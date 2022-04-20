@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.hutool.core.date.DateTime;
@@ -38,19 +39,14 @@ public class CacheUtils extends Splatoon2Service {
      */
     private static void buildSalmonSchedule() {
         salmon = getSalmon();
-        int bgWidth = 760;
-        int bgHeight = 820;
+        int bgWidth = 800;
+        int bgHeight = 700;
         SALMON_PIC = new BufferedImage(bgWidth, bgHeight, BufferedImage.TYPE_INT_RGB);
         Graphics graphics = SALMON_PIC.getGraphics();
         // 填充背景色
         graphics.setColor(Color.decode("#ff5600"));
         graphics.fillRect(0, 0, bgWidth, bgHeight);
-        SalmonDetail nowSalmon = salmon.getDetails().stream().min(Comparator.comparing(SalmonDetail::getStartTime))
-                .get();
-        SalmonDetail nextSalmon = salmon.getDetails().stream().max(Comparator.comparing(SalmonDetail::getStartTime))
-                .get();
-        buildSalmonPicture(nowSalmon, 0);
-        buildSalmonPicture(nextSalmon, 400);
+        buildSalmonPicture(salmon.getDetails());
     }
 
     /**
@@ -185,36 +181,46 @@ public class CacheUtils extends Splatoon2Service {
 
     /**
      *
-     * @param beginHeight
-     *            开始绘制的高度
+     * @param salmonDetailList
+     *            打工安排数组
      *
      */
-    private static void buildSalmonPicture(SalmonDetail salmonDetail, int beginHeight) {
-        BufferedImage image = ResourceUtils.getExternalPicture(salmonDetail.getStage().getImage());
-        Font f = new Font("Fira Code", Font.BOLD, 25);
-        Color mycolor = Color.WHITE;
-        Graphics graphics = SALMON_PIC.getGraphics();
-        graphics.setColor(mycolor);
-        graphics.setFont(f);
-        String time = DateUtils.formatDate(salmonDetail.getStartTime(), "MM-dd HH:mm") + " - "
-                + DateUtils.formatDate(salmonDetail.getEndTime(), "MM-dd HH:mm");
-        // 编写文字
-        graphics.drawString(time, 20, 30 + beginHeight);
-        // 绘制地图
-        graphics.drawImage(image, 10, 40 + beginHeight, 640, 360, null);
+    private static void buildSalmonPicture(List<SalmonDetail> salmonDetailList) {
+        salmonDetailList.sort(Comparator.comparing(SalmonDetail::getStartTime));
+        for (int i = 0; i < salmonDetailList.size(); i++) {
+            int beginHeight = i * 350;
+            SalmonDetail salmonDetail = salmonDetailList.get(i);
+            BufferedImage mapImage = ResourceUtils.getExternalPicture(salmonDetail.getStage().getImage());
+            Font f = new Font("Fira Code", Font.BOLD, 50);
+            Color mycolor = Color.WHITE;
+            Graphics graphics = SALMON_PIC.getGraphics();
+            graphics.setColor(mycolor);
+            graphics.setFont(f);
+            String time = DateUtils.formatDate(salmonDetail.getStartTime(), "MM-dd HH:mm") + " - "
+                    + DateUtils.formatDate(salmonDetail.getEndTime(), "MM-dd HH:mm");
+            // 编写文字
+            graphics.drawString(time, 20, beginHeight += 50);
+            // 绘制地图
+            graphics.drawImage(ResourceUtils.radius(mapImage), 10, beginHeight += 10, 480, 270, null);
 
-        // 在地图右边绘制武器
-        for (SalmonWeapon weapon : salmonDetail.getWeapons()) {
-            BufferedImage weaponImage = null;
-            if (weapon.getWeapon() != null) {
-                weaponImage = ResourceUtils.getInternalPicture(weapon.getWeapon().getImage());
-            } else {
-                weaponImage = ResourceUtils
-                        .getInternalPicture("/images/coop_weapons/746f7e90bc151334f0bf0d2a1f0987e311b03736.png");
+            // 在地图右边绘制武器
+            int weaponBeginWidth = 10 + 480;
+            int weaponBeginHeight = beginHeight - 10;
+            for (int j = 0; j < salmonDetail.getWeapons().size(); j++) {
+                SalmonWeapon weapon = salmonDetail.getWeapons().get(j);
+                BufferedImage weaponImage;
+                if (weapon.getWeapon() != null) {
+                    weaponImage = ResourceUtils.getInternalPicture(weapon.getWeapon().getImage());
+                } else {
+                    weaponImage = ResourceUtils
+                            .getInternalPicture("/images/coop_weapons/746f7e90bc151334f0bf0d2a1f0987e311b03736.png");
+                }
+
+                graphics.drawImage(weaponImage, (weaponBeginWidth + (j % 2 * 150)),
+                        (weaponBeginHeight + (j > 1 ? 130 : 0)), 150, 150, null);
             }
-            graphics.drawImage(weaponImage, 10 + 640, 40 + beginHeight + 90 * salmonDetail.getWeapons().indexOf(weapon),
-                    90, 90, null);
         }
+        SALMON_PIC = ResourceUtils.radius(SALMON_PIC);
     }
 
 }
