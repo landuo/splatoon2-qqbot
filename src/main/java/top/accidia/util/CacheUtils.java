@@ -85,12 +85,12 @@ public class CacheUtils extends Splatoon2Service {
      */
     private static void buildBattleSchedules() {
         schedule = Splatoon2Service.getSchedules();
-        int bgWidth = 1450;
+        int bgWidth = 1500;
         int bgHeight = 1250;
         int picWidth = 640;
         int picHeight = 360;
-        int paddingLeft = 120;
-        int paddingTop = 70;
+        int paddingLeft = 170;
+        int paddingTop = 100;
         int picPaddingTop = 15;
         int picPaddingLeft = 20;
         // 预生成12张时刻图存放到map中
@@ -120,18 +120,19 @@ public class CacheUtils extends Splatoon2Service {
             int picPaddingLeft, Regular regular, Gachi gachi, League league, BufferedImage bufferedImage) {
         Graphics graphics = bufferedImage.getGraphics();
         // 设置文字字体和画笔颜色
-        Font font = new Font("Baoli SC", Font.BOLD, 100);
+        Font font = new Font("Baoli SC", Font.BOLD, 150);
         graphics.setFont(font);
         graphics.setColor(Color.WHITE);
         // 打印时间
-        graphics.drawString(DateUtils.formatDate(regular.getStartTime(), "MM-dd HH:mm") + " - "
-                + DateUtils.formatDate(regular.getEndTime(), "MM-dd HH:mm"), paddingLeft, paddingTop);
+        graphics.drawString(DateUtils.formatDate(regular.getStartTime(), "HH:mm") + " - "
+                + DateUtils.formatDate(regular.getEndTime(), "HH:mm"), paddingLeft, paddingTop);
         font = new Font("Baoli SC", Font.BOLD, 150);
+        graphics.setFont(font);
         // 打印游戏模式
         String gameMode = GameModeEnum.getZhNameByKey(regular.getRule().getKey());
         // 竖排文字
         for (int j = 0; j < gameMode.length(); j++) {
-            graphics.drawString(String.valueOf(gameMode.charAt(j)), 10, 200 + 150 * j);
+            graphics.drawString(String.valueOf(gameMode.charAt(j)), 10, 250 + 150 * j);
         }
 
         // 添加涂地模式的地图
@@ -147,7 +148,7 @@ public class CacheUtils extends Splatoon2Service {
         gameMode = GameModeEnum.getZhNameByKey(gachi.getRule().getKey());
         // 竖排文字
         for (int j = 0; j < gameMode.length(); j++) {
-            graphics.drawString(String.valueOf(gameMode.charAt(j)), 10, (gameMode.length() == 1 ? 650 : 570) + 100 * j);
+            graphics.drawString(String.valueOf(gameMode.charAt(j)), 10, (gameMode.length() == 1 ? 700 : 600) + 100 * j);
         }
         // 添加排位模式的地图
         BufferedImage gachiStageA = ResourceUtils
@@ -163,7 +164,8 @@ public class CacheUtils extends Splatoon2Service {
         gameMode = GameModeEnum.getZhNameByKey(league.getRule().getKey());
         // 竖排文字
         for (int j = 0; j < gameMode.length(); j++) {
-            graphics.drawString(String.valueOf(gameMode.charAt(j)), 10, (gameMode.length() == 1 ? 1000 : 950) + j * 50);
+            graphics.drawString(String.valueOf(gameMode.charAt(j)), 10,
+                    (gameMode.length() == 1 ? 1100 : 1000) + j * 50);
         }
         // 添加真格模式的地图
         BufferedImage leagueStageA = ResourceUtils
@@ -175,13 +177,13 @@ public class CacheUtils extends Splatoon2Service {
         graphics.drawImage(leagueStageB, paddingLeft + picPaddingLeft + picWidth,
                 paddingTop + picPaddingTop * 3 + picHeight * 2, picWidth, picHeight, null);
 
-        int iconMarginLeft = 695;
+        int iconMarginLeft = 745;
         // 添加对战模式图标
         graphics.drawImage(ImgUtil.read(ResourceUtil.getResourceObj("images/battle-regular.png")), iconMarginLeft, 180,
                 156, 156, null);
-        graphics.drawImage(ImgUtil.read(ResourceUtil.getResourceObj("images/battle-ranked.png")), iconMarginLeft, 540,
+        graphics.drawImage(ImgUtil.read(ResourceUtil.getResourceObj("images/battle-ranked.png")), iconMarginLeft, 550,
                 156, 156, null);
-        graphics.drawImage(ImgUtil.read(ResourceUtil.getResourceObj("images/battle-league.png")), iconMarginLeft, 910,
+        graphics.drawImage(ImgUtil.read(ResourceUtil.getResourceObj("images/battle-league.png")), iconMarginLeft, 940,
                 156, 156, null);
     }
 
