@@ -15,7 +15,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum GameModeEnum {
-    SPLAT_ZONES("splat_zones", "区域"), RAINMAKER("rainmaker", "鱼"), CLAM_BLITZ("clam_blitz", "蛤蜊"),
+    SPLAT_ZONES("splat_zones", "区域"), RAINMAKER("rainmaker", "鱼"), CLAM_BLITZ("clam_blitz", "蛤 蜊"),
     TOWER_CONTROL("tower_control", "塔"), TURF_WAR("turf_war", "涂地");
 
     private final String key;
