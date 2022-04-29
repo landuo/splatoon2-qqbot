@@ -224,8 +224,13 @@ public class CacheUtils extends Splatoon2Service {
                 if (weapon.getWeapon() != null) {
                     weaponImage = ResourceUtils.getInternalPicture(weapon.getWeapon().getImage());
                 } else {
-                    weaponImage = ResourceUtils
-                            .getInternalPicture("/images/coop_weapons/746f7e90bc151334f0bf0d2a1f0987e311b03736.png");
+                    if (weapon.getId().equals("-2")) {
+                        weaponImage = ResourceUtils.getInternalPicture(
+                                "/images/coop_weapons/7076c8181ab5c49d2ac91e43a2d945a46a99c17d.png");
+                    } else {
+                        weaponImage = ResourceUtils.getInternalPicture(
+                                "/images/coop_weapons/746f7e90bc151334f0bf0d2a1f0987e311b03736.png");
+                    }
                 }
 
                 graphics.drawImage(weaponImage, (weaponBeginWidth + (j % 2 * weaponWH)),
