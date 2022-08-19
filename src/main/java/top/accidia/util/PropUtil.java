@@ -13,6 +13,7 @@ public class PropUtil {
     public static final String BOT_QQ = "botQQ";
     public static final String BOT_PWD = "botPwd";
     public static final String PIC_DIR = "picDir";
+    public static final String SEND_TO = "sendTo";
     private static final Props PROPS = new Props("app.properties");
 
     public static String getProp(String key) {
