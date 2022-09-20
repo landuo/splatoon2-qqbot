@@ -81,7 +81,6 @@ public class CacheUtils extends SplatoonService {
             graphics.dispose();
             drawScheduleV3(picWidth, picHeight, paddingLeft, paddingTop, picPaddingTop, picPaddingLeft, regular,
                     bankara, bufferedImage);
-            System.out.println(DateUtils.formatLocalDateTime(startTime, null));
             // ImgUtil.write(bufferedImage,
             // FileUtil.file("/Users/accidia/pic/" + DateUtils.formatLocalDateTime(startTime, null) + ".png"));
             // 将生成的图片保存到map中

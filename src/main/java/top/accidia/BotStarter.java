@@ -20,7 +20,7 @@ import top.accidia.util.PropUtil;
 public class BotStarter {
 
     public static void main(String[] args) {
-         ApplicationUtil.initWeaponData();
+        ApplicationUtil.initWeaponData();
         ApplicationUtil.initSchedule();
         ApplicationUtil.initKeyword();
         long botQQ = Long.parseLong(PropUtil.getProp(PropUtil.BOT_QQ));
