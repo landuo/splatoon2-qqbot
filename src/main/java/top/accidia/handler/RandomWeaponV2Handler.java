@@ -16,10 +16,10 @@ import static top.accidia.util.MessageUtil.sendWeaponMessage;
  *
  * @author accidia
  */
-public class RandomWeaponHandler implements CommandHandler {
+public class RandomWeaponV2Handler implements CommandHandler {
     @Override
     public CommandEnum getCommand() {
-        return CommandEnum.RANDOM_WEAPON;
+        return CommandEnum.RANDOM_WEAPON_V2;
     }
 
     @Override

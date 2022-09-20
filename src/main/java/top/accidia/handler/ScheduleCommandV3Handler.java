@@ -19,11 +19,11 @@ import top.accidia.util.ResourceUtils;
  *
  * @author accidia
  */
-public class ScheduleCommandHandler implements CommandHandler {
+public class ScheduleCommandV3Handler implements CommandHandler {
 
     @Override
     public CommandEnum getCommand() {
-        return CommandEnum.SCHEDULES_V2;
+        return CommandEnum.SCHEDULES_V3;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ScheduleCommandHandler implements CommandHandler {
         String startTime = (startHour < (DateUtil.thisHour(true) >> 1 << 1)
                 ? DateUtil.format(DateUtil.tomorrow(), "MM-dd") : DateUtil.format(DateUtil.date(), "MM-dd"))
                 + CharSequenceUtil.SPACE + ((startHour < 10 ? "0" : "") + startHour);
-        BufferedImage bufferedImage = CacheUtils.getScheduleByTime(startTime);
+        BufferedImage bufferedImage = CacheUtils.getScheduleByTimeV3(startTime);
         messages.append(Contact.uploadImage(event.getSubject(), ResourceUtils.scale(bufferedImage)));
         messages.append(new At(event.getSender().getId()));
         event.getSubject().sendMessage(messages.build());

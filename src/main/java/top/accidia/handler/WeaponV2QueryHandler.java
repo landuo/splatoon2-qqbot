@@ -17,10 +17,10 @@ import static top.accidia.util.MessageUtil.sendWeaponMessage;
  *
  * @author accidia
  */
-public class WeaponQueryHandler implements CommandHandler {
+public class WeaponV2QueryHandler implements CommandHandler {
     @Override
     public CommandEnum getCommand() {
-        return CommandEnum.WEAPON;
+        return CommandEnum.WEAPON_V2;
     }
 
     @Override

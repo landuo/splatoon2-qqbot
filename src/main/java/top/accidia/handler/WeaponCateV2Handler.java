@@ -21,10 +21,10 @@ import static top.accidia.util.ApplicationUtil.WEAPONS;
  *
  * @author accidia
  */
-public class WeaponCateHandler implements CommandHandler {
+public class WeaponCateV2Handler implements CommandHandler {
     @Override
     public CommandEnum getCommand() {
-        return CommandEnum.WEAPON_CATE;
+        return CommandEnum.WEAPON_CATE_V2;
     }
 
     @Override

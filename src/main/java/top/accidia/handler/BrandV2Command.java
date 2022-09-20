@@ -12,10 +12,10 @@ import top.accidia.enums.CommandEnum;
  * 
  * @author accidia
  */
-public class BrandCommand implements CommandHandler {
+public class BrandV2Command implements CommandHandler {
     @Override
     public CommandEnum getCommand() {
-        return CommandEnum.BRANDS;
+        return CommandEnum.BRANDS_V2;
     }
 
     @Override

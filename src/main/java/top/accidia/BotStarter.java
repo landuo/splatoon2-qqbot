@@ -20,7 +20,7 @@ import top.accidia.util.PropUtil;
 public class BotStarter {
 
     public static void main(String[] args) {
-        ApplicationUtil.initWeaponData();
+         ApplicationUtil.initWeaponData();
         ApplicationUtil.initSchedule();
         ApplicationUtil.initKeyword();
         long botQQ = Long.parseLong(PropUtil.getProp(PropUtil.BOT_QQ));
@@ -52,7 +52,7 @@ public class BotStarter {
                 commandHandler.process(bot, event, messages);
                 return;
             }
-            if (ApplicationUtil.KEYWORDS.stream().anyMatch(content::contains)) {
+            if (ApplicationUtil.KEYWORDS.stream().anyMatch(content::contains) && content.contains("借")) {
                 if (event instanceof GroupAwareMessageEvent) {
                     messages.append("群: ").append(((GroupAwareMessageEvent) event).getGroup().getName()).append("\n")
                             .append("发送人: ").append(event.getSenderName()).append("\n").append("发送信息: ")

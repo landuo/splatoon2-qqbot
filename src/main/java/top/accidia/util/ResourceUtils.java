@@ -148,6 +148,35 @@ public class ResourceUtils {
         return ImgUtil.read(picDir + picSuffix);
     }
 
+    public static BufferedImage getWeaponPictureV3(String url) {
+        return getExternalPictureV3(url, "weapon3");
+    }
+
+    public static BufferedImage getMapPictureV3(String url) {
+        return getExternalPictureV3(url, "map3");
+    }
+
+    /**
+     * 获取外部文件夹的图片
+     *
+     * @param url
+     *            图片地址
+     * @param pathPrefix
+     *            路径存储前缀
+     */
+    private static BufferedImage getExternalPictureV3(String url, String pathPrefix) {
+        String picDir = PropUtil.getPicDir();
+        String filePath = picDir + File.separator + pathPrefix + File.separator
+                + url.substring(url.lastIndexOf("/") + 1);
+        File file = FileUtil.file(filePath);
+        if (file.exists()) {
+            return ImgUtil.read(file);
+        }
+        // 图片不存在的话就去远程下载
+        HttpUtil.downloadFile(url, filePath);
+        return ImgUtil.read(filePath);
+    }
+
     /**
      * 获取内部文件夹的图片
      *

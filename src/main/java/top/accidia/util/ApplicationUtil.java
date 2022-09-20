@@ -19,7 +19,7 @@ public class ApplicationUtil {
     public static CopyOnWriteArrayList<String> KEYWORDS;
 
     public static void initWeaponData() {
-        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("merge-data.json");
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("weapon2.json");
         InputStreamReader reader = new InputStreamReader(is);
         Gson gson = new Gson();
         // 使用GSON把一个json对象转换成java对象

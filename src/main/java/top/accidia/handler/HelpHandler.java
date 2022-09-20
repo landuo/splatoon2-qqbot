@@ -19,7 +19,6 @@ public class HelpHandler implements CommandHandler {
     @Override
     public void process(Bot bot, MessageEvent event, MessageChainBuilder messages) {
         for (CommandEnum commandEnum : CommandEnum.values()) {
-            System.out.println(commandEnum.ordinal());
             messages.append(commandEnum.getName()).append(":\n").append(commandEnum.getDesc());
             if (commandEnum.ordinal() != CommandEnum.values().length - 1) {
                 messages.append("\n\n");
